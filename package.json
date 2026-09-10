@@ -1,0 +1,35 @@
+{
+  "name": "gitv",
+  "version": "0.1.0",
+  "description": "A live, byte-by-byte atlas of a real Git repository",
+  "type": "module",
+  "bin": {
+    "gitv": "dist/bin/gitv.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc && node scripts/copy-assets.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:package": "npm run build && node dist/scripts/verify-package.js",
+    "start": "npm run build && node dist/bin/gitv.js",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "demo": "npm run build --silent && node dist/scripts/demo.js",
+    "format": "prettier --write \"{bin,lib,public,scripts,test}/**/*.{ts,css,html,mjs}\" \"*.json\"",
+    "format:check": "prettier --check \"{bin,lib,public,scripts,test}/**/*.{ts,css,html,mjs}\" \"*.json\"",
+    "prepack": "npm run build"
+  },
+  "files": [
+    "dist/bin",
+    "dist/lib",
+    "dist/public",
+    "README.md"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3"
+  }
+}

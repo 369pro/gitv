@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>gitv — Git, unfolded.</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="gitv"
+        >g<span>i</span>tv<span class="brand-dot">.</span></a
+      ><span class="divider"></span
+      ><span class="repo-name" id="repo-name">—</span
+      ><span id="branch" class="branch"></span>
+      <div class="top-actions">
+        <span id="connection" class="connection"
+          ><i></i><span data-i18n="live">实时</span></span
+        ><button id="classroom" data-i18n="classroom">课堂模式</button
+        ><button id="language">EN</button
+        ><button id="fullscreen" aria-label="Fullscreen">⛶</button>
+      </div>
+    </header>
+    <main>
+      <div class="intro">
+        <div>
+          <div class="eyebrow">A LIVING GIT ATLAS</div>
+          <h1 data-i18n="title">看见每一次变化。</h1>
+        </div>
+        <div class="repo-path" id="repo-path"></div>
+      </div>
+      <nav class="section-nav">
+        <button class="active" data-tab="atlas" data-i18n="atlas">
+          仓库图谱</button
+        ><button data-tab="reflog">
+          reflog <span id="reflog-count"></span></button
+        ><button data-tab="storage" data-i18n="storage">磁盘与解析</button>
+        <div class="legend">
+          <span class="dot commit"></span>commit<span class="dot tree"></span
+          >tree<span class="dot blob"></span>blob<span class="dot index"></span
+          >index
+        </div>
+      </nav>
+      <div id="warning" class="warning" hidden></div>
+      <div id="operation" hidden></div>
+      <section id="atlas" class="tab-page">
+        <div class="canvas-heading">
+          <div>
+            <span class="section-number">01</span
+            ><span data-i18n="history">历史与引用</span
+            ><span class="count" id="commit-count">0</span>
+          </div>
+          <div class="canvas-actions">
+            <button id="zoom-out" aria-label="Zoom out">−</button
+            ><span id="zoom-label">100%</span
+            ><button id="zoom-in" aria-label="Zoom in">+</button
+            ><button id="fit" data-i18n="fit">适应画布</button
+            ><button id="more" data-i18n="more">加载更多</button>
+          </div>
+        </div>
+        <div class="viewport" id="viewport">
+          <div class="world" id="world">
+            <svg id="connections" aria-hidden="true"></svg>
+            <div id="nodes"></div>
+          </div>
+          <div class="canvas-caption">
+            <span>●</span
+            ><span data-i18n="drag">拖动节点 · 空白处平移 · 滚轮缩放</span>
+          </div>
+          <div class="empty" id="empty" hidden data-i18n="empty">
+            等待第一个 commit
+          </div>
+        </div>
+        <div class="lower-grid">
+          <section class="tree-section">
+            <div class="panel-heading">
+              <span class="section-number">02</span
+              ><span data-i18n="objects">对象与内容</span
+              ><span class="count" id="tree-count"></span
+              ><button id="tree-up" aria-label="Parent tree">↑</button
+              ><button id="tree-inspect" class="mono">bytes ↗</button>
+            </div>
+            <div id="tree-breadcrumb" class="breadcrumb"></div>
+            <div id="tree-cards" class="tree-cards"></div>
+          </section>
+          <section class="work-section">
+            <div class="panel-heading">
+              <span class="section-number">03</span
+              ><span>index <span class="muted">→</span> working tree</span
+              ><span class="count" id="file-count"></span
+              ><button id="ignored" data-i18n="ignored">已忽略</button>
+            </div>
+            <div id="file-list" class="file-list"></div>
+          </section>
+        </div>
+      </section>
+      <section id="reflog" class="tab-page" hidden></section>
+      <section id="storage" class="tab-page" hidden></section>
+    </main>
+    <footer class="timeline">
+      <button id="live-button" class="live-button">
+        <i></i><span data-i18n="live">实时</span></button
+      ><span class="divider"></span
+      ><button id="previous" aria-label="Previous snapshot">◀</button
+      ><button id="pause" aria-label="Pause">Ⅱ</button
+      ><button id="next" aria-label="Next snapshot">▶</button
+      ><input
+        id="scrubber"
+        type="range"
+        min="0"
+        max="0"
+        value="0"
+        aria-label="Snapshot timeline"
+      /><span id="timeline-label">—</span
+      ><span class="readonly" data-i18n="readonly">只读连接</span>
+    </footer>
+    <div class="overlay" id="overlay" hidden>
+      <section
+        class="inspector"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="inspector-title"
+      >
+        <header>
+          <div>
+            <div class="eyebrow" id="inspector-kind">OBJECT INSPECTOR</div>
+            <h2 id="inspector-title"></h2>
+          </div>
+          <button id="close-inspector" aria-label="Close">×</button>
+        </header>
+        <div id="inspector-body"></div>
+      </section>
+    </div>
+    <div id="toast" class="toast" hidden></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
